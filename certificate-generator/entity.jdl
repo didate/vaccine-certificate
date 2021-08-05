@@ -1,0 +1,42 @@
+//for notification microservice
+entity TrackerEntityInstance{
+	uid String required
+    nom String required
+    prenom String required
+    sexe String required
+    profession String required
+    age Integer required
+    prefecture String required
+    sousPrefecture String
+    quartier String required
+    village String
+    telephone String required
+    localId String required
+    code Long
+    certificate String
+}
+
+entity Generation{
+	dateGeneration LocalDate required
+}
+
+entity Event{
+  uid String required
+  dateVaccination LocalDate required
+  siteVaccination String required
+  typeVaccin String required
+  lot String required
+}
+
+entity Signature {
+	authorite String required
+    signature ImageBlob required
+}
+relationship OneToMany {
+  TrackerEntityInstance{event} to Event{tei required}
+  TrackerEntityInstance{event} to Event{tei required}
+}
+
+// Set pagination options
+paginate * with pagination
+service all with serviceImpl
