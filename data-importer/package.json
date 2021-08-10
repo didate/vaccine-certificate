@@ -4,14 +4,19 @@
   "description": "Import vaccine data from dhis 2",
   "main": "entry.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node entry",
+    "server": "nodemon entry"
   },
   "author": "didate",
   "license": "ISC",
-
   "dependencies": {
     "axios": "^0.20.0",
-    "config": "^3.3.1"
+    "config": "^3.3.1",
+    "node-cron": "^2.0.3",
+    "papaparse": "^5.3.1",
+    "pg": "^8.7.1",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

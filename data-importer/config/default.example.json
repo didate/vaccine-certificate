@@ -1,6 +1,14 @@
 {
     "dhis2": {
         "baseUrl": "https://play.dhis2.org/dev/api/33",
-        "token": "Basic base64"
+        "token": "Basic base64",
+        "query" :""
+    },
+    "postgres" : {
+        "user":"",
+        "host":"",
+        "database":"",
+        "password":"",
+        "port" : 5234
     }
 }
