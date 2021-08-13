@@ -8,6 +8,7 @@ export interface IEvent {
   siteVaccination?: string;
   typeVaccin?: string;
   lot?: string;
+  dose?: string;
   tei?: ITrackerEntityInstance;
 }
 

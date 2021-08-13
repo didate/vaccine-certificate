@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Col, Row, Table } from 'reactstrap';
-import { ICrudGetAllAction, TextFormat, getSortState, IPaginationBaseState, JhiPagination, JhiItemCount } from 'react-jhipster';
+import { ICrudGetAllAction, getSortState, IPaginationBaseState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getEntities } from './event.reducer';
-import { IEvent } from 'app/shared/model/event.model';
+import { getEntities } from './plainte.reducer';
+import { IPlainte } from 'app/shared/model/plainte.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
 
-export interface IEventProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
+export interface IPlainteProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
-export const Event = (props: IEventProps) => {
+export const Plainte = (props: IPlainteProps) => {
   const [paginationState, setPaginationState] = useState(
     overridePaginationStateWithQueryParams(getSortState(props.location, ITEMS_PER_PAGE), props.location.search)
   );
@@ -64,73 +64,59 @@ export const Event = (props: IEventProps) => {
       activePage: currentPage,
     });
 
-  const { eventList, match, loading, totalItems } = props;
+  const { plainteList, match, loading, totalItems } = props;
   return (
     <div>
-      <h2 id="event-heading">
-        Events
+      <h2 id="plainte-heading">
+        Plaintes
         <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
           <FontAwesomeIcon icon="plus" />
-          &nbsp; Create new Event
+          &nbsp; Create new Plainte
         </Link>
       </h2>
       <div className="table-responsive">
-        {eventList && eventList.length > 0 ? (
+        {plainteList && plainteList.length > 0 ? (
           <Table responsive>
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
                   ID <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('uid')}>
-                  Uid <FontAwesomeIcon icon="sort" />
+                <th className="hand" onClick={sort('telephone')}>
+                  Telephone <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('dateVaccination')}>
-                  Date Vaccination <FontAwesomeIcon icon="sort" />
+                <th className="hand" onClick={sort('localId')}>
+                  Local Id <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('siteVaccination')}>
-                  Site Vaccination <FontAwesomeIcon icon="sort" />
+                <th className="hand" onClick={sort('code')}>
+                  Code <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('typeVaccin')}>
-                  Type Vaccin <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('lot')}>
-                  Lot <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('dose')}>
-                  Dose <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  Tei <FontAwesomeIcon icon="sort" />
+                <th className="hand" onClick={sort('commentaire')}>
+                  Commentaire <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
             </thead>
             <tbody>
-              {eventList.map((event, i) => (
+              {plainteList.map((plainte, i) => (
                 <tr key={`entity-${i}`}>
                   <td>
-                    <Button tag={Link} to={`${match.url}/${event.id}`} color="link" size="sm">
-                      {event.id}
+                    <Button tag={Link} to={`${match.url}/${plainte.id}`} color="link" size="sm">
+                      {plainte.id}
                     </Button>
                   </td>
-                  <td>{event.uid}</td>
-                  <td>
-                    {event.dateVaccination ? <TextFormat type="date" value={event.dateVaccination} format={APP_LOCAL_DATE_FORMAT} /> : null}
-                  </td>
-                  <td>{event.siteVaccination}</td>
-                  <td>{event.typeVaccin}</td>
-                  <td>{event.lot}</td>
-                  <td>{event.dose}</td>
-                  <td>{event.tei ? <Link to={`tracker-entity-instance/${event.tei.id}`}>{event.tei.id}</Link> : ''}</td>
+                  <td>{plainte.telephone}</td>
+                  <td>{plainte.localId}</td>
+                  <td>{plainte.code}</td>
+                  <td>{plainte.commentaire}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`${match.url}/${event.id}`} color="info" size="sm">
+                      <Button tag={Link} to={`${match.url}/${plainte.id}`} color="info" size="sm">
                         <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
                       </Button>
                       <Button
                         tag={Link}
-                        to={`${match.url}/${event.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                        to={`${match.url}/${plainte.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
                         color="primary"
                         size="sm"
                       >
@@ -138,7 +124,7 @@ export const Event = (props: IEventProps) => {
                       </Button>
                       <Button
                         tag={Link}
-                        to={`${match.url}/${event.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                        to={`${match.url}/${plainte.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
                         color="danger"
                         size="sm"
                       >
@@ -151,11 +137,11 @@ export const Event = (props: IEventProps) => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Events found</div>
+          !loading && <div className="alert alert-warning">No Plaintes found</div>
         )}
       </div>
       {props.totalItems ? (
-        <div className={eventList && eventList.length > 0 ? '' : 'd-none'}>
+        <div className={plainteList && plainteList.length > 0 ? '' : 'd-none'}>
           <Row className="justify-content-center">
             <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
           </Row>
@@ -176,10 +162,10 @@ export const Event = (props: IEventProps) => {
   );
 };
 
-const mapStateToProps = ({ event }: IRootState) => ({
-  eventList: event.entities,
-  loading: event.loading,
-  totalItems: event.totalItems,
+const mapStateToProps = ({ plainte }: IRootState) => ({
+  plainteList: plainte.entities,
+  loading: plainte.loading,
+  totalItems: plainte.totalItems,
 });
 
 const mapDispatchToProps = {
@@ -189,4 +175,4 @@ const mapDispatchToProps = {
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Event);
+export default connect(mapStateToProps, mapDispatchToProps)(Plainte);

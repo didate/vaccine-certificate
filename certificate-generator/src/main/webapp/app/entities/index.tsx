@@ -8,6 +8,7 @@ import TrackerEntityInstance from './tracker-entity-instance';
 import Generation from './generation';
 import Event from './event';
 import Signature from './signature';
+import Plainte from './plainte';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -18,6 +19,7 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}generation`} component={Generation} />
       <ErrorBoundaryRoute path={`${match.url}event`} component={Event} />
       <ErrorBoundaryRoute path={`${match.url}signature`} component={Signature} />
+      <ErrorBoundaryRoute path={`${match.url}plainte`} component={Plainte} />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
     </Switch>
   </div>

@@ -152,6 +152,19 @@ export const TrackerEntityInstanceUpdate = (props: ITrackerEntityInstanceUpdateP
                 />
               </AvGroup>
               <AvGroup>
+                <Label id="regionLabel" for="tracker-entity-instance-region">
+                  Region
+                </Label>
+                <AvField
+                  id="tracker-entity-instance-region"
+                  type="text"
+                  name="region"
+                  validate={{
+                    required: { value: true, errorMessage: 'This field is required.' },
+                  }}
+                />
+              </AvGroup>
+              <AvGroup>
                 <Label id="prefectureLabel" for="tracker-entity-instance-prefecture">
                   Prefecture
                 </Label>

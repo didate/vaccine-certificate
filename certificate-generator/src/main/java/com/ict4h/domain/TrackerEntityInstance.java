@@ -50,6 +50,10 @@ public class TrackerEntityInstance implements Serializable {
     private Integer age;
 
     @NotNull
+    @Column(name = "region", nullable = false)
+    private String region;
+
+    @NotNull
     @Column(name = "prefecture", nullable = false)
     private String prefecture;
 
@@ -166,6 +170,19 @@ public class TrackerEntityInstance implements Serializable {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public TrackerEntityInstance region(String region) {
+        this.region = region;
+        return this;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public String getPrefecture() {
@@ -325,6 +342,7 @@ public class TrackerEntityInstance implements Serializable {
             ", sexe='" + getSexe() + "'" +
             ", profession='" + getProfession() + "'" +
             ", age=" + getAge() +
+            ", region='" + getRegion() + "'" +
             ", prefecture='" + getPrefecture() + "'" +
             ", sousPrefecture='" + getSousPrefecture() + "'" +
             ", quartier='" + getQuartier() + "'" +

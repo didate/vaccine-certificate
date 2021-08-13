@@ -48,6 +48,9 @@ public class EventResourceIT {
     private static final String DEFAULT_LOT = "AAAAAAAAAA";
     private static final String UPDATED_LOT = "BBBBBBBBBB";
 
+    private static final String DEFAULT_DOSE = "AAAAAAAAAA";
+    private static final String UPDATED_DOSE = "BBBBBBBBBB";
+
     @Autowired
     private EventRepository eventRepository;
 
@@ -74,7 +77,8 @@ public class EventResourceIT {
             .dateVaccination(DEFAULT_DATE_VACCINATION)
             .siteVaccination(DEFAULT_SITE_VACCINATION)
             .typeVaccin(DEFAULT_TYPE_VACCIN)
-            .lot(DEFAULT_LOT);
+            .lot(DEFAULT_LOT)
+            .dose(DEFAULT_DOSE);
         // Add required entity
         TrackerEntityInstance trackerEntityInstance;
         if (TestUtil.findAll(em, TrackerEntityInstance.class).isEmpty()) {
@@ -99,7 +103,8 @@ public class EventResourceIT {
             .dateVaccination(UPDATED_DATE_VACCINATION)
             .siteVaccination(UPDATED_SITE_VACCINATION)
             .typeVaccin(UPDATED_TYPE_VACCIN)
-            .lot(UPDATED_LOT);
+            .lot(UPDATED_LOT)
+            .dose(UPDATED_DOSE);
         // Add required entity
         TrackerEntityInstance trackerEntityInstance;
         if (TestUtil.findAll(em, TrackerEntityInstance.class).isEmpty()) {
@@ -137,6 +142,7 @@ public class EventResourceIT {
         assertThat(testEvent.getSiteVaccination()).isEqualTo(DEFAULT_SITE_VACCINATION);
         assertThat(testEvent.getTypeVaccin()).isEqualTo(DEFAULT_TYPE_VACCIN);
         assertThat(testEvent.getLot()).isEqualTo(DEFAULT_LOT);
+        assertThat(testEvent.getDose()).isEqualTo(DEFAULT_DOSE);
     }
 
     @Test
@@ -256,6 +262,25 @@ public class EventResourceIT {
 
     @Test
     @Transactional
+    public void checkDoseIsRequired() throws Exception {
+        int databaseSizeBeforeTest = eventRepository.findAll().size();
+        // set the field null
+        event.setDose(null);
+
+        // Create the Event, which fails.
+
+
+        restEventMockMvc.perform(post("/api/events")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(event)))
+            .andExpect(status().isBadRequest());
+
+        List<Event> eventList = eventRepository.findAll();
+        assertThat(eventList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllEvents() throws Exception {
         // Initialize the database
         eventRepository.saveAndFlush(event);
@@ -269,7 +294,8 @@ public class EventResourceIT {
             .andExpect(jsonPath("$.[*].dateVaccination").value(hasItem(DEFAULT_DATE_VACCINATION.toString())))
             .andExpect(jsonPath("$.[*].siteVaccination").value(hasItem(DEFAULT_SITE_VACCINATION)))
             .andExpect(jsonPath("$.[*].typeVaccin").value(hasItem(DEFAULT_TYPE_VACCIN)))
-            .andExpect(jsonPath("$.[*].lot").value(hasItem(DEFAULT_LOT)));
+            .andExpect(jsonPath("$.[*].lot").value(hasItem(DEFAULT_LOT)))
+            .andExpect(jsonPath("$.[*].dose").value(hasItem(DEFAULT_DOSE)));
     }
     
     @Test
@@ -287,7 +313,8 @@ public class EventResourceIT {
             .andExpect(jsonPath("$.dateVaccination").value(DEFAULT_DATE_VACCINATION.toString()))
             .andExpect(jsonPath("$.siteVaccination").value(DEFAULT_SITE_VACCINATION))
             .andExpect(jsonPath("$.typeVaccin").value(DEFAULT_TYPE_VACCIN))
-            .andExpect(jsonPath("$.lot").value(DEFAULT_LOT));
+            .andExpect(jsonPath("$.lot").value(DEFAULT_LOT))
+            .andExpect(jsonPath("$.dose").value(DEFAULT_DOSE));
     }
     @Test
     @Transactional
@@ -314,7 +341,8 @@ public class EventResourceIT {
             .dateVaccination(UPDATED_DATE_VACCINATION)
             .siteVaccination(UPDATED_SITE_VACCINATION)
             .typeVaccin(UPDATED_TYPE_VACCIN)
-            .lot(UPDATED_LOT);
+            .lot(UPDATED_LOT)
+            .dose(UPDATED_DOSE);
 
         restEventMockMvc.perform(put("/api/events")
             .contentType(MediaType.APPLICATION_JSON)
@@ -330,6 +358,7 @@ public class EventResourceIT {
         assertThat(testEvent.getSiteVaccination()).isEqualTo(UPDATED_SITE_VACCINATION);
         assertThat(testEvent.getTypeVaccin()).isEqualTo(UPDATED_TYPE_VACCIN);
         assertThat(testEvent.getLot()).isEqualTo(UPDATED_LOT);
+        assertThat(testEvent.getDose()).isEqualTo(UPDATED_DOSE);
     }
 
     @Test

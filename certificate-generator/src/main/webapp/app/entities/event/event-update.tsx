@@ -143,6 +143,19 @@ export const EventUpdate = (props: IEventUpdateProps) => {
                 />
               </AvGroup>
               <AvGroup>
+                <Label id="doseLabel" for="event-dose">
+                  Dose
+                </Label>
+                <AvField
+                  id="event-dose"
+                  type="text"
+                  name="dose"
+                  validate={{
+                    required: { value: true, errorMessage: 'This field is required.' },
+                  }}
+                />
+              </AvGroup>
+              <AvGroup>
                 <Label for="event-tei">Tei</Label>
                 <AvInput
                   id="event-tei"

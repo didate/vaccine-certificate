@@ -1,11 +1,12 @@
 //for notification microservice
 entity TrackerEntityInstance{
-	uid String required
+	  uid String required
     nom String required
     prenom String required
     sexe String required
     profession String required
     age Integer required
+    region String required
     prefecture String required
     sousPrefecture String
     quartier String required
@@ -26,11 +27,19 @@ entity Event{
   siteVaccination String required
   typeVaccin String required
   lot String required
+  dose String required
+}
+
+entity Plainte{
+  telephone String
+  localId String
+  code Long
+  commentaire String required
 }
 
 entity Signature {
 	authorite String required
-    signature ImageBlob required
+  signature ImageBlob required
 }
 relationship OneToMany {
   TrackerEntityInstance{event} to Event{tei required}

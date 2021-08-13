@@ -48,6 +48,9 @@ public class TrackerEntityInstanceResourceIT {
     private static final Integer DEFAULT_AGE = 1;
     private static final Integer UPDATED_AGE = 2;
 
+    private static final String DEFAULT_REGION = "AAAAAAAAAA";
+    private static final String UPDATED_REGION = "BBBBBBBBBB";
+
     private static final String DEFAULT_PREFECTURE = "AAAAAAAAAA";
     private static final String UPDATED_PREFECTURE = "BBBBBBBBBB";
 
@@ -100,6 +103,7 @@ public class TrackerEntityInstanceResourceIT {
             .sexe(DEFAULT_SEXE)
             .profession(DEFAULT_PROFESSION)
             .age(DEFAULT_AGE)
+            .region(DEFAULT_REGION)
             .prefecture(DEFAULT_PREFECTURE)
             .sousPrefecture(DEFAULT_SOUS_PREFECTURE)
             .quartier(DEFAULT_QUARTIER)
@@ -124,6 +128,7 @@ public class TrackerEntityInstanceResourceIT {
             .sexe(UPDATED_SEXE)
             .profession(UPDATED_PROFESSION)
             .age(UPDATED_AGE)
+            .region(UPDATED_REGION)
             .prefecture(UPDATED_PREFECTURE)
             .sousPrefecture(UPDATED_SOUS_PREFECTURE)
             .quartier(UPDATED_QUARTIER)
@@ -160,6 +165,7 @@ public class TrackerEntityInstanceResourceIT {
         assertThat(testTrackerEntityInstance.getSexe()).isEqualTo(DEFAULT_SEXE);
         assertThat(testTrackerEntityInstance.getProfession()).isEqualTo(DEFAULT_PROFESSION);
         assertThat(testTrackerEntityInstance.getAge()).isEqualTo(DEFAULT_AGE);
+        assertThat(testTrackerEntityInstance.getRegion()).isEqualTo(DEFAULT_REGION);
         assertThat(testTrackerEntityInstance.getPrefecture()).isEqualTo(DEFAULT_PREFECTURE);
         assertThat(testTrackerEntityInstance.getSousPrefecture()).isEqualTo(DEFAULT_SOUS_PREFECTURE);
         assertThat(testTrackerEntityInstance.getQuartier()).isEqualTo(DEFAULT_QUARTIER);
@@ -306,6 +312,25 @@ public class TrackerEntityInstanceResourceIT {
 
     @Test
     @Transactional
+    public void checkRegionIsRequired() throws Exception {
+        int databaseSizeBeforeTest = trackerEntityInstanceRepository.findAll().size();
+        // set the field null
+        trackerEntityInstance.setRegion(null);
+
+        // Create the TrackerEntityInstance, which fails.
+
+
+        restTrackerEntityInstanceMockMvc.perform(post("/api/tracker-entity-instances")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(trackerEntityInstance)))
+            .andExpect(status().isBadRequest());
+
+        List<TrackerEntityInstance> trackerEntityInstanceList = trackerEntityInstanceRepository.findAll();
+        assertThat(trackerEntityInstanceList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkPrefectureIsRequired() throws Exception {
         int databaseSizeBeforeTest = trackerEntityInstanceRepository.findAll().size();
         // set the field null
@@ -397,6 +422,7 @@ public class TrackerEntityInstanceResourceIT {
             .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE)))
             .andExpect(jsonPath("$.[*].profession").value(hasItem(DEFAULT_PROFESSION)))
             .andExpect(jsonPath("$.[*].age").value(hasItem(DEFAULT_AGE)))
+            .andExpect(jsonPath("$.[*].region").value(hasItem(DEFAULT_REGION)))
             .andExpect(jsonPath("$.[*].prefecture").value(hasItem(DEFAULT_PREFECTURE)))
             .andExpect(jsonPath("$.[*].sousPrefecture").value(hasItem(DEFAULT_SOUS_PREFECTURE)))
             .andExpect(jsonPath("$.[*].quartier").value(hasItem(DEFAULT_QUARTIER)))
@@ -424,6 +450,7 @@ public class TrackerEntityInstanceResourceIT {
             .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE))
             .andExpect(jsonPath("$.profession").value(DEFAULT_PROFESSION))
             .andExpect(jsonPath("$.age").value(DEFAULT_AGE))
+            .andExpect(jsonPath("$.region").value(DEFAULT_REGION))
             .andExpect(jsonPath("$.prefecture").value(DEFAULT_PREFECTURE))
             .andExpect(jsonPath("$.sousPrefecture").value(DEFAULT_SOUS_PREFECTURE))
             .andExpect(jsonPath("$.quartier").value(DEFAULT_QUARTIER))
@@ -460,6 +487,7 @@ public class TrackerEntityInstanceResourceIT {
             .sexe(UPDATED_SEXE)
             .profession(UPDATED_PROFESSION)
             .age(UPDATED_AGE)
+            .region(UPDATED_REGION)
             .prefecture(UPDATED_PREFECTURE)
             .sousPrefecture(UPDATED_SOUS_PREFECTURE)
             .quartier(UPDATED_QUARTIER)
@@ -484,6 +512,7 @@ public class TrackerEntityInstanceResourceIT {
         assertThat(testTrackerEntityInstance.getSexe()).isEqualTo(UPDATED_SEXE);
         assertThat(testTrackerEntityInstance.getProfession()).isEqualTo(UPDATED_PROFESSION);
         assertThat(testTrackerEntityInstance.getAge()).isEqualTo(UPDATED_AGE);
+        assertThat(testTrackerEntityInstance.getRegion()).isEqualTo(UPDATED_REGION);
         assertThat(testTrackerEntityInstance.getPrefecture()).isEqualTo(UPDATED_PREFECTURE);
         assertThat(testTrackerEntityInstance.getSousPrefecture()).isEqualTo(UPDATED_SOUS_PREFECTURE);
         assertThat(testTrackerEntityInstance.getQuartier()).isEqualTo(UPDATED_QUARTIER);

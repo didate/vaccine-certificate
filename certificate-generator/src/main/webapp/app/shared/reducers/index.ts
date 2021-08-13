@@ -27,6 +27,10 @@ import event, {
 import signature, {
   SignatureState
 } from 'app/entities/signature/signature.reducer';
+// prettier-ignore
+import plainte, {
+  PlainteState
+} from 'app/entities/plainte/plainte.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -43,6 +47,7 @@ export interface IRootState {
   readonly generation: GenerationState;
   readonly event: EventState;
   readonly signature: SignatureState;
+  readonly plainte: PlainteState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -61,6 +66,7 @@ const rootReducer = combineReducers<IRootState>({
   generation,
   event,
   signature,
+  plainte,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });

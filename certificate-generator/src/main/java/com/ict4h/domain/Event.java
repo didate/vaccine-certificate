@@ -45,6 +45,10 @@ public class Event implements Serializable {
     @Column(name = "lot", nullable = false)
     private String lot;
 
+    @NotNull
+    @Column(name = "dose", nullable = false)
+    private String dose;
+
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(value = "events", allowSetters = true)
@@ -124,6 +128,19 @@ public class Event implements Serializable {
         this.lot = lot;
     }
 
+    public String getDose() {
+        return dose;
+    }
+
+    public Event dose(String dose) {
+        this.dose = dose;
+        return this;
+    }
+
+    public void setDose(String dose) {
+        this.dose = dose;
+    }
+
     public TrackerEntityInstance getTei() {
         return tei;
     }
@@ -164,6 +181,7 @@ public class Event implements Serializable {
             ", siteVaccination='" + getSiteVaccination() + "'" +
             ", typeVaccin='" + getTypeVaccin() + "'" +
             ", lot='" + getLot() + "'" +
+            ", dose='" + getDose() + "'" +
             "}";
     }
 }

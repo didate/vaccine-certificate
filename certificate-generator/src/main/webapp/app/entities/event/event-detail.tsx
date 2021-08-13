@@ -49,6 +49,10 @@ export const EventDetail = (props: IEventDetailProps) => {
             <span id="lot">Lot</span>
           </dt>
           <dd>{eventEntity.lot}</dd>
+          <dt>
+            <span id="dose">Dose</span>
+          </dt>
+          <dd>{eventEntity.dose}</dd>
           <dt>Tei</dt>
           <dd>{eventEntity.tei ? eventEntity.tei.id : ''}</dd>
         </dl>

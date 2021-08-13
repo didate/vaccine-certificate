@@ -100,6 +100,9 @@ export const TrackerEntityInstance = (props: ITrackerEntityInstanceProps) => {
                 <th className="hand" onClick={sort('age')}>
                   Age <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('region')}>
+                  Region <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('prefecture')}>
                   Prefecture <FontAwesomeIcon icon="sort" />
                 </th>
@@ -141,6 +144,7 @@ export const TrackerEntityInstance = (props: ITrackerEntityInstanceProps) => {
                   <td>{trackerEntityInstance.sexe}</td>
                   <td>{trackerEntityInstance.profession}</td>
                   <td>{trackerEntityInstance.age}</td>
+                  <td>{trackerEntityInstance.region}</td>
                   <td>{trackerEntityInstance.prefecture}</td>
                   <td>{trackerEntityInstance.sousPrefecture}</td>
                   <td>{trackerEntityInstance.quartier}</td>

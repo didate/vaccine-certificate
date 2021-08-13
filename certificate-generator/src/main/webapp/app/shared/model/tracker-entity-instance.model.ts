@@ -8,6 +8,7 @@ export interface ITrackerEntityInstance {
   sexe?: string;
   profession?: string;
   age?: number;
+  region?: string;
   prefecture?: string;
   sousPrefecture?: string;
   quartier?: string;

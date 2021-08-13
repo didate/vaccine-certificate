@@ -33,6 +33,9 @@
             <column name="age" type="integer">
                 <constraints nullable="false" />
             </column>
+            <column name="region" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <column name="prefecture" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
@@ -86,6 +89,7 @@
             <column name="sexe" type="string"/>
             <column name="profession" type="string"/>
             <column name="age" type="numeric"/>
+            <column name="region" type="string"/>
             <column name="prefecture" type="string"/>
             <column name="sous_prefecture" type="string"/>
             <column name="quartier" type="string"/>

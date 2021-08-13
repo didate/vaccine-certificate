@@ -56,6 +56,7 @@ public class CacheConfiguration {
             createCache(cm, com.ict4h.domain.Generation.class.getName());
             createCache(cm, com.ict4h.domain.Event.class.getName());
             createCache(cm, com.ict4h.domain.Signature.class.getName());
+            createCache(cm, com.ict4h.domain.Plainte.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

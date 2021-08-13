@@ -50,6 +50,10 @@ export const TrackerEntityInstanceDetail = (props: ITrackerEntityInstanceDetailP
           </dt>
           <dd>{trackerEntityInstanceEntity.age}</dd>
           <dt>
+            <span id="region">Region</span>
+          </dt>
+          <dd>{trackerEntityInstanceEntity.region}</dd>
+          <dt>
             <span id="prefecture">Prefecture</span>
           </dt>
           <dd>{trackerEntityInstanceEntity.prefecture}</dd>
