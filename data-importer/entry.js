@@ -1,7 +1,6 @@
 const { dhis2 } = require('./dhis2/dhis2');
 const config = require('config')
 const connectDB = require('./config/db');
-const { query } = require('./dhis2/query');
 const cron = require("node-cron");
 const { constants } = require('./constant');
 
@@ -40,7 +39,7 @@ const processing = async (rows, client) =>{
 
             const row = formatEvent(v_event);
 
-            // check if the current tei is already in the database;
+            // check if the current tei is in the database;
             const dbTei = await client.query(constants.QUERY_SELECT_TEI, [row.trackedEntityInstanceUid]);
 
             let trackedEntityInstanceId = 0;
@@ -61,7 +60,7 @@ const processing = async (rows, client) =>{
             let eventValues = [];
             const dbEvent = await client.query(constants.QUERY_SELECT_EVENT, [row.eventUid]);
             if (dbEvent.rows && dbEvent.rows.length > 0) {
-                // update the event
+                // update linked event
                 eventText = constants.QUERY_UPDATE_EVENT; // "update event set date_vaccination=$1,site_vaccination=$2,type_vaccin=$3,lot=$4 where uid = $5;";
                 eventValues = [row.dateVaccination, row.siteVaccination, row.typeVaccin, row.numeroLot, row.eventUid];
             } else {
