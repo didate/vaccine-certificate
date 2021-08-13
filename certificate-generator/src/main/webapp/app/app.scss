@@ -1,6 +1,8 @@
 // Override Boostrap variables
 // Import Bootstrap source files from node_modules
+@import './bootstrap-variables';
 @import 'node_modules/bootstrap/scss/bootstrap';
+
 body {
   background: #fafafa;
   margin: 0;
@@ -310,3 +312,108 @@ http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+
+/* TABLE RESPONSIVE */
+
+
+.responsive-table,
+.long-table {
+    width: 100%;
+    margin-bottom: 1.5em;
+    border-spacing: 0;
+}
+.responsive-table,
+.long-table {
+    font-size: 0.9em;
+}
+
+.responsive-table thead,
+.long-table thead {
+    position: absolute;
+    clip: rect(1px 1px 1px 1px);
+    /* IE6, IE7 */
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+.responsive-table thead,
+.long-table thead {
+    position: relative;
+    clip: auto;
+    height: auto;
+    width: auto;
+    overflow: auto;
+}
+.responsive-table thead th,
+.long-table thead th {
+    background-color: $primary;
+    border: 1px solid $primary;
+    font-weight: bold;
+    text-align: left;
+    font-size: 11px;
+    color: white;
+    text-transform: uppercase;
+}
+.currency {
+    text-align: right !important;
+}
+.responsive-table tbody td,
+.long-table tbody td {
+    border: 1px solid $primary;
+    text-align: left;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.responsive-table th,
+.responsive-table td,
+.long-table th,
+.long-table td {
+    padding: 0.3em;
+}
+
+@media only screen and (max-width: 700px) {
+    .responsive-table th,
+    .responsive-table td {
+        padding: 1.3em;
+    }
+    .responsive-table table,
+    .responsive-table thead,
+    .responsive-table tbody,
+    .responsive-table tr,
+    .responsive-table th,
+    .responsive-table td {
+        display: block;
+    }
+
+    .responsive-table thead {
+        display: none;
+    }
+
+    .responsive-table td {
+        padding-left: 150px !important;
+        position: relative;
+        margin-top: -1px;
+    }
+
+    .responsive-table td::before {
+        padding: 10px;
+        content: attr(data-title);
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        width: 130px;
+        color: white;
+        background-color: #1d96b2;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+    }
+    .responsive-table tr {
+        margin-bottom: 1rem;
+    }
+}

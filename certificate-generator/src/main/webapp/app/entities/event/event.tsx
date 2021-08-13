@@ -74,7 +74,7 @@ export const Event = (props: IEventProps) => {
           &nbsp; Create new Event
         </Link>
       </h2>
-      <div className="table-responsive">
+      <div className="responsive-table">
         {eventList && eventList.length > 0 ? (
           <Table responsive>
             <thead>

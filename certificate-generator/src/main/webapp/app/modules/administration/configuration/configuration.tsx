@@ -43,7 +43,7 @@ export const ConfigurationPage = (props: IConfigurationPageProps) => {
       <h2 id="configuration-page-heading">Configuration</h2>
       <span>Filter</span> <Input type="search" value={filter} onChange={changeFilter} name="search" id="search" />
       <label>Spring configuration</label>
-      <Table className="table table-striped table-bordered table-responsive d-table">
+      <Table className="table table-striped table-bordered responsive-table d-table">
         <thead>
           <tr>
             <th onClick={changeReversePrefix}>Prefix</th>
@@ -78,7 +78,7 @@ export const ConfigurationPage = (props: IConfigurationPageProps) => {
               <h4>
                 <span>{envKey.name}</span>
               </h4>
-              <Table className="table table-sm table-striped table-bordered table-responsive d-table">
+              <Table className="table table-sm table-striped table-bordered responsive-table d-table">
                 <thead>
                   <tr key={envIndex}>
                     <th className="w-40">Property</th>

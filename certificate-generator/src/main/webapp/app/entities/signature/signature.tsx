@@ -74,7 +74,7 @@ export const Signature = (props: ISignatureProps) => {
           &nbsp; Create new Signature
         </Link>
       </h2>
-      <div className="table-responsive">
+      <div className="responsive-table">
         {signatureList && signatureList.length > 0 ? (
           <Table responsive>
             <thead>

@@ -74,7 +74,7 @@ export const Generation = (props: IGenerationProps) => {
           &nbsp; Create new Generation
         </Link>
       </h2>
-      <div className="table-responsive">
+      <div className="responsive-table">
         {generationList && generationList.length > 0 ? (
           <Table responsive>
             <thead>

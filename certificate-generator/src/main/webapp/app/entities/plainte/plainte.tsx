@@ -74,7 +74,7 @@ export const Plainte = (props: IPlainteProps) => {
           &nbsp; Create new Plainte
         </Link>
       </h2>
-      <div className="table-responsive">
+      <div className="responsive-table">
         {plainteList && plainteList.length > 0 ? (
           <Table responsive>
             <thead>
