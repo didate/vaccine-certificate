@@ -49,7 +49,6 @@ const processing = async (rows, client) =>{
                 trackedEntityInstanceId = dbTei.rows[0].id;
             } else {
                 // insert a trackedEntityInstance
-                 // const text =  "insert into tracker_entity_instance (id,age,certificate,code,local_id,nom,prenom,sexe,telephone,prefecture,sous_prefecture,village,quartier,profession,uid) values (nextval('sequence_generator'), $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING id;"
                 const values = [row.age, row.naissance, 234, row.dateVaccination, row.nom, row.prenom, row.sexe, row.telephone, row.prefecture, row.sousPrefecture, "", row.quartier, row.profession, row.trackedEntityInstanceUid];
                 tei = await client.query(constants.QUERY_INSERT_TEI, values);
                 trackedEntityInstanceId = tei.rows[0].id;
@@ -61,11 +60,11 @@ const processing = async (rows, client) =>{
             const dbEvent = await client.query(constants.QUERY_SELECT_EVENT, [row.eventUid]);
             if (dbEvent.rows && dbEvent.rows.length > 0) {
                 // update linked event
-                eventText = constants.QUERY_UPDATE_EVENT; // "update event set date_vaccination=$1,site_vaccination=$2,type_vaccin=$3,lot=$4 where uid = $5;";
+                eventText = constants.QUERY_UPDATE_EVENT;
                 eventValues = [row.dateVaccination, row.siteVaccination, row.typeVaccin, row.numeroLot, row.eventUid];
             } else {
                 // insert linked event (vaccination)
-                eventText = constants.QUERY_INSERT_EVENT; //  "insert into event (id,uid,date_vaccination,site_vaccination,type_vaccin,lot,tei_id) values(nextval('sequence_generator'),$1,$2,$3,$4,$5,$6)";
+                eventText = constants.QUERY_INSERT_EVENT;
                 eventValues = [row.eventUid, row.dateVaccination, row.siteVaccination, row.typeVaccin, row.numeroLot, trackedEntityInstanceId];
             }
             await client.query(eventText, eventValues);
