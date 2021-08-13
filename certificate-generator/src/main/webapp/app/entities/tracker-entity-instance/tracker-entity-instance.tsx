@@ -156,9 +156,9 @@ export const TrackerEntityInstance = (props: ITrackerEntityInstanceProps) => {
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${trackerEntityInstance.id}`} color="info" size="sm">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" /> {/* <span className="d-none d-md-inline">View</span> */}
                       </Button>
-                      <Button
+                     {/*  <Button
                         tag={Link}
                         to={`${match.url}/${trackerEntityInstance.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
                         color="primary"
@@ -173,7 +173,7 @@ export const TrackerEntityInstance = (props: ITrackerEntityInstanceProps) => {
                         size="sm"
                       >
                         <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
-                      </Button>
+                      </Button> */}
                     </div>
                   </td>
                 </tr>

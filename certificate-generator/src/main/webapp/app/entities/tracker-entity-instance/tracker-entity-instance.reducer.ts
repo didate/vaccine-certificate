@@ -5,9 +5,11 @@ import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { ITrackerEntityInstance, defaultValue } from 'app/shared/model/tracker-entity-instance.model';
+import { IEvent } from 'app/shared/model/event.model';
 
 export const ACTION_TYPES = {
   FETCH_TRACKERENTITYINSTANCE_LIST: 'trackerEntityInstance/FETCH_TRACKERENTITYINSTANCE_LIST',
+  FETCH_EVENT_LIST: 'trackerEntityInstance/FETCH_EVENT_LIST',
   FETCH_TRACKERENTITYINSTANCE: 'trackerEntityInstance/FETCH_TRACKERENTITYINSTANCE',
   CREATE_TRACKERENTITYINSTANCE: 'trackerEntityInstance/CREATE_TRACKERENTITYINSTANCE',
   UPDATE_TRACKERENTITYINSTANCE: 'trackerEntityInstance/UPDATE_TRACKERENTITYINSTANCE',
@@ -108,6 +110,14 @@ export const getEntities: ICrudGetAllAction<ITrackerEntityInstance> = (page, siz
     payload: axios.get<ITrackerEntityInstance>(`${requestUrl}${sort ? '&' : '?'}cacheBuster=${new Date().getTime()}`),
   };
 };
+
+export const getEvents : ICrudGetAllAction<IEvent> = id =>{
+  const requestUrl =`${apiUrl}/${id}/events`
+  return {
+    type : ACTION_TYPES.FETCH_TRACKERENTITYINSTANCE_LIST,
+    payload: axios.get<IEvent>(requestUrl),
+  }
+}
 
 export const getEntity: ICrudGetAction<ITrackerEntityInstance> = id => {
   const requestUrl = `${apiUrl}/${id}`;

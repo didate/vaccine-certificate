@@ -122,7 +122,7 @@ export const Event = (props: IEventProps) => {
                   <td>{event.typeVaccin}</td>
                   <td>{event.lot}</td>
                   <td>{event.dose}</td>
-                  <td>{event.tei ? <Link to={`tracker-entity-instance/${event.tei.id}`}>{event.tei.id}</Link> : ''}</td>
+                  <td>{event.tei ? <Link to={`tracker-entity-instance/${event.tei.id}`}>{event.tei.localId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${event.id}`} color="info" size="sm">

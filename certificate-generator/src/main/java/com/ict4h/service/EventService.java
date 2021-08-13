@@ -1,10 +1,12 @@
 package com.ict4h.service;
 
 import com.ict4h.domain.Event;
+import com.ict4h.domain.TrackerEntityInstance;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,6 +29,9 @@ public interface EventService {
      * @return the list of entities.
      */
     Page<Event> findAll(Pageable pageable);
+
+    public List<Event> findByTrackerEntityInstance(TrackerEntityInstance tei);
+
 
 
     /**

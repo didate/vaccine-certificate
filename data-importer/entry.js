@@ -49,7 +49,7 @@ const processing = async (rows, client) =>{
                 trackedEntityInstanceId = dbTei.rows[0].id;
             } else {
                 // insert a trackedEntityInstance
-                const values = [row.age, row.naissance, 234, row.dateVaccination, row.nom, row.prenom, row.sexe, row.telephone, row.prefecture, row.sousPrefecture, "", row.quartier, row.profession, row.trackedEntityInstanceUid];
+                const values = [row.age, row.naissance, 234, row.localid, row.nom, row.prenom, row.sexe, row.telephone, row.prefecture, row.sousPrefecture, "", row.quartier, row.profession, row.trackedEntityInstanceUid,row.region];
                 tei = await client.query(constants.QUERY_INSERT_TEI, values);
                 trackedEntityInstanceId = tei.rows[0].id;
             }
@@ -65,7 +65,7 @@ const processing = async (rows, client) =>{
             } else {
                 // insert linked event (vaccination)
                 eventText = constants.QUERY_INSERT_EVENT;
-                eventValues = [row.eventUid, row.dateVaccination, row.siteVaccination, row.typeVaccin, row.numeroLot, trackedEntityInstanceId];
+                eventValues = [row.eventUid, row.dateVaccination, row.siteVaccination, row.typeVaccin, row.numeroLot, trackedEntityInstanceId, row.numeroDose];
             }
             await client.query(eventText, eventValues);
         } catch (error) {
@@ -76,7 +76,8 @@ const processing = async (rows, client) =>{
 
 
 formatEvent = (v_event) => {
-    return {
+
+    const result = {
         eventUid: v_event[0],
         trackedEntityInstanceUid: v_event[5],
         localid: v_event[13],
@@ -98,17 +99,21 @@ formatEvent = (v_event) => {
         typeVaccin: v_event[30],
         siteVaccination: v_event[31] === "AUTRES" ? v_event[32] : v_event[31],
         dateProchainDose: v_event[33],
-        age: calcAge(v_event[17], v_event[26])
+        age: calcAge(new Date(v_event[17]), v_event[26])
     };
+
+    return result;
+
 }
 
 function calcAge(birthDate, vaccDate) {
+
     var birthday = new Date(birthDate);
     //return ~~((new Date(vaccDate) - birthday) / (31557600000));
     return new Date(vaccDate).getFullYear() - birthday.getFullYear();
 }
 
- // postgres();
+postgres();
 
 
 
