@@ -1,14 +1,19 @@
 package com.ict4h.web.rest;
 
+import com.ict4h.domain.Event;
 import com.ict4h.domain.TrackerEntityInstance;
+import com.ict4h.service.EventService;
 import com.ict4h.service.TrackerEntityInstanceService;
 import com.ict4h.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import liquibase.pro.packaged.ev;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,6 +42,9 @@ public class TrackerEntityInstanceResource {
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
+
+    @Autowired
+    public EventService eventService;
 
     private final TrackerEntityInstanceService trackerEntityInstanceService;
 
@@ -109,6 +117,13 @@ public class TrackerEntityInstanceResource {
         log.debug("REST request to get TrackerEntityInstance : {}", id);
         Optional<TrackerEntityInstance> trackerEntityInstance = trackerEntityInstanceService.findOne(id);
         return ResponseUtil.wrapOrNotFound(trackerEntityInstance);
+    }
+
+    @GetMapping("/tracker-entity-instances/{id}/events")
+    public ResponseEntity<List<Event>> getEvents(@PathVariable Long id) {
+        log.debug("REST request to get TrackerEntityInstance : {}", id);
+        List<Event> events = eventService.findByTei(getTrackerEntityInstance(id).getBody());
+        return ResponseEntity.ok(events);
     }
 
     /**

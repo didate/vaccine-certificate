@@ -1,75 +1,92 @@
 <div class="row justify-content-center">
-    <div class="col-8">
+    <div class="col-12">
         <div *ngIf="trackerEntityInstance">
-            <h2><span>Tracker Entity Instance</span> {{ trackerEntityInstance.id }}</h2>
-
-            <hr>
-
+           
             <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span>Uid</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.uid }}</span>
-                </dd>
-                <dt><span>Nom</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.nom }}</span>
-                </dd>
-                <dt><span>Prenom</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.prenom }}</span>
-                </dd>
-                <dt><span>Sexe</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.sexe }}</span>
-                </dd>
-                <dt><span>Profession</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.profession }}</span>
-                </dd>
-                <dt><span>Age</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.age }}</span>
-                </dd>
-                <dt><span>Region</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.region }}</span>
-                </dd>
-                <dt><span>Prefecture</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.prefecture }}</span>
-                </dd>
-                <dt><span>Sous Prefecture</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.sousPrefecture }}</span>
-                </dd>
-                <dt><span>Quartier</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.quartier }}</span>
-                </dd>
-                <dt><span>Village</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.village }}</span>
-                </dd>
-                <dt><span>Telephone</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.telephone }}</span>
-                </dd>
-                <dt><span>Local Id</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.localId }}</span>
-                </dd>
-                <dt><span>Code</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.code }}</span>
-                </dd>
-                <dt><span>Certificate</span></dt>
-                <dd>
-                    <span>{{ trackerEntityInstance.certificate }}</span>
-                </dd>
-            </dl>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th class="th-title">UID</th>
+                        <td>{{ trackerEntityInstance.uid }}</td>
 
+                        <th class="th-title">SEXE</th>
+                        <td>{{ trackerEntityInstance.sexe }}</td>
+
+                        <th class="th-title">REGION</th>
+                        <td>{{ trackerEntityInstance.region }}</td>
+                    </tr>
+
+                    <tr>
+                        <th class="th-title">LOCAL ID</th>
+                        <td>{{ trackerEntityInstance.localId }}</td>
+
+                        <th class="th-title">AGE</th>
+                        <td>{{ trackerEntityInstance.age }} ans</td>
+                        
+                        <th class="th-title">PREFECTURE</th>
+                        <td>{{ trackerEntityInstance.prefecture }}</td>
+                        
+                    </tr>
+
+                    <tr>
+
+                        <th class="th-title">CODE</th>
+                        <td>{{ trackerEntityInstance.code }} </td>
+
+                        <th class="th-title">PROFESSION</th>
+                        <td>{{ trackerEntityInstance.profession }}</td>
+
+                        <th class="th-title">SOUS PREFECTURE</th>
+                        <td>{{ trackerEntityInstance.sousPrefecture }}</td>
+                        
+                    </tr>
+
+                    <tr>
+                        <th class="th-title">NOM</th>
+                        <td>{{ trackerEntityInstance.prenom }} {{ trackerEntityInstance.nom }}</td>
+
+
+                        <th class="th-title">TELEPHONE</th>
+                        <td>{{ trackerEntityInstance.telephone }}</td>
+
+                        <th class="th-title">QUARTIER</th>
+                        <td>{{ trackerEntityInstance.quartier }}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+            
+    <div class="table-responsive" id="events" *ngIf="events && events.length > 0">
+
+        <table class="table table-striped responsive-table" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col"  ><span>Uid</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  ><span>Dose</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  ><span>Date Vaccination</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  ><span>Site Vaccination</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  ><span>Type Vaccin</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  ><span>Lot</span> <fa-icon icon="sort"></fa-icon></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let event of events ;trackBy: trackId">
+                    <td>{{ event.uid }}</td>
+                    <td>{{ event.dose }}</td>
+                    <td>{{ event.dateVaccination | date:'mediumDate' }}</td>
+                    <td>{{ event.siteVaccination }}</td>
+                    <td>{{ event.typeVaccin }}</td>
+                    <td>{{ event.lot }}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+            
+            
+           
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">

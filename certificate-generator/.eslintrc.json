@@ -2,7 +2,9 @@
   "plugins": ["@typescript-eslint/tslint"],
   "extends": ["jhipster"],
   "parserOptions": {
-    "project": "./tsconfig.base.json"
+    "project": "./tsconfig.base.json",
+    "sourceType": "module",
+    "ecmaVersion": 2020
   },
   "rules": {
     "@typescript-eslint/tslint/config": [
@@ -19,6 +21,7 @@
         "ignoreRestSiblings": false
       }
     ],
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-console": " off"
   }
 }

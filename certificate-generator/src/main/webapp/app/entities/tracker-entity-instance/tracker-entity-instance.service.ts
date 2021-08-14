@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { ITrackerEntityInstance } from 'app/shared/model/tracker-entity-instance.model';
+import { IEvent } from 'app/shared/model/event.model';
 
 type EntityResponseType = HttpResponse<ITrackerEntityInstance>;
 type EntityArrayResponseType = HttpResponse<ITrackerEntityInstance[]>;
@@ -25,6 +26,10 @@ export class TrackerEntityInstanceService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<ITrackerEntityInstance>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findEvent(id?: number): Observable<HttpResponse<IEvent[]>> {
+    return this.http.get<IEvent[]>(`${this.resourceUrl}/${id}/events`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

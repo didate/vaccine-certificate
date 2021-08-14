@@ -2,6 +2,7 @@ package com.ict4h.service.impl;
 
 import com.ict4h.service.EventService;
 import com.ict4h.domain.Event;
+import com.ict4h.domain.TrackerEntityInstance;
 import com.ict4h.repository.EventRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -53,5 +55,10 @@ public class EventServiceImpl implements EventService {
     public void delete(Long id) {
         log.debug("Request to delete Event : {}", id);
         eventRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Event> findByTei(TrackerEntityInstance tei) {
+        return eventRepository.findByTei(tei);
     }
 }
