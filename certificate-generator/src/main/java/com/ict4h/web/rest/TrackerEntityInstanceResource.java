@@ -1,9 +1,12 @@
 package com.ict4h.web.rest;
 
+import com.google.common.base.Joiner;
 import com.ict4h.domain.Event;
 import com.ict4h.domain.TrackerEntityInstance;
 import com.ict4h.service.EventService;
 import com.ict4h.service.TrackerEntityInstanceService;
+import com.ict4h.service.search.SpecificationBuilder;
+import com.ict4h.service.search.criteria.SearchOperation;
 import com.ict4h.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -17,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -28,6 +32,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * REST controller for managing {@link com.ict4h.domain.TrackerEntityInstance}.
@@ -99,13 +105,26 @@ public class TrackerEntityInstanceResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of trackerEntityInstances in body.
      */
     @GetMapping("/tracker-entity-instances")
-    public ResponseEntity<List<TrackerEntityInstance>> getAllTrackerEntityInstances(Pageable pageable) {
+    public ResponseEntity<List<TrackerEntityInstance>> getAllTrackerEntityInstances(@RequestParam(value = "search") String search, Pageable pageable) {
         log.debug("REST request to get a page of TrackerEntityInstances");
-        Page<TrackerEntityInstance> page = trackerEntityInstanceService.findAll(pageable);
+        Page<TrackerEntityInstance> page = trackerEntityInstanceService.findAll(resolveSpecification(search), pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    
+    protected Specification<TrackerEntityInstance> resolveSpecification(String searchParameters) {
+        SpecificationBuilder<TrackerEntityInstance> builder = new SpecificationBuilder<TrackerEntityInstance>();
+        String operationSetExpression = Joiner.on("|").join(SearchOperation.SIMPLE_OPERATION_SET);
+        Pattern pattern = Pattern
+                .compile("(\\p{Punct}?)(\\w+?)(" + operationSetExpression + ")(\\p{Punct}?)(\\w+?)(\\p{Punct}?),");
+        Matcher matcher = pattern.matcher(searchParameters + ",");
+        while (matcher.find()) {
+            builder.with(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(5), matcher.group(4),
+                    matcher.group(6));
+        }
+        return builder.build();
+    }
     /**
      * {@code GET  /tracker-entity-instances/:id} : get the "id" trackerEntityInstance.
      *

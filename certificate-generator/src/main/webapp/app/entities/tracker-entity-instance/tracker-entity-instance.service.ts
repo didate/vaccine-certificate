@@ -32,9 +32,9 @@ export class TrackerEntityInstanceService {
     return this.http.get<IEvent[]>(`${this.resourceUrl}/${id}/events`, { observe: 'response' });
   }
 
-  query(req?: any): Observable<EntityArrayResponseType> {
+  query(search?: string, req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<ITrackerEntityInstance[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<ITrackerEntityInstance[]>(`${this.resourceUrl}?search=${search}`, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

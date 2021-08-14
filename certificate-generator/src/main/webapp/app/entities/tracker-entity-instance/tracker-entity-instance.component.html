@@ -7,6 +7,89 @@
 
     <jhi-alert></jhi-alert>
 
+    <fieldset class="filter">
+        <legend class="filter">
+            <span>Filtre</span>
+            <button type="button" (click)="filterStatus()" class="btn btn-light btn-sm">
+                <fa-icon [icon]="filterIcon" aria-hidden="true"></fa-icon>
+            </button>
+        </legend>
+        <form *ngIf="isFilterShow" name="editForm" role="form" (ngSubmit)="search()" novalidate [formGroup]="editForm">
+
+            <div class="form-row">
+                <div class="form-group col-md-2 col-sm-2">
+
+                    <label class="form-control-label" for="field_uid">Uid</label>
+                    <input type="text" class="form-control form-control-sm" name="uid" id="field_uid"
+                        formControlName="uid" />
+                </div>
+                <div class="form-group col-md-2 col-sm-2">
+                    <label class="form-control-label" for="field_localId">Local Id</label>
+                    <input type="text" class="form-control form-control-sm" name="localId" id="field_localId"
+                        formControlName="localId" />
+                </div>
+                <div class="form-group col-md-2 col-sm-2">
+                    <label class="form-control-label" for="field_code">Code</label>
+                    <input type="number" class="form-control form-control-sm" name="code" id="field_code"
+                        formControlName="code" />
+                </div>
+                <div class="form-group col-md-2 col-sm-2">
+                    <label class="form-control-label" for="field_nom">Nom</label>
+                    <input type="text" class="form-control form-control-sm" name="nom" id="field_nom"
+                        formControlName="nom" />
+                </div>
+                <div class="form-group col-md-2 col-sm-2">
+                    <label class="form-control-label" for="field_prenom">Prenom</label>
+                    <input type="text" class="form-control form-control-sm" name="prenom" id="field_prenom"
+                        formControlName="prenom" />
+                </div>
+                <div class="form-group col-md-2 col-sm-2">
+                    <label class="form-control-label" for="field_sexe">Sexe</label>
+                    <input type="text" class="form-control form-control-sm" name="sexe" id="field_sexe"
+                        formControlName="sexe" />
+                </div>
+            </div>
+            <div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-2 col-sm-2">
+                        <label class="form-control-label" for="field_profession">Profession</label>
+                        <input type="text" class="form-control form-control-sm" name="profession" id="field_profession"
+                            formControlName="profession" />
+                    </div>
+                    <div class="form-group col-md-2 col-sm-2">
+                        <label class="form-control-label" for="field_age">Age</label>
+                        <input type="number" class="form-control form-control-sm" name="age" id="field_age"
+                            formControlName="age" />
+                    </div>
+                    <div class="form-group col-md-2 col-sm-2">
+                        <label class="form-control-label" for="field_prefecture">Prefecture</label>
+                        <input type="text" class="form-control form-control-sm" name="prefecture" id="field_prefecture"
+                            formControlName="prefecture" />
+                    </div>
+                    <div class="form-group col-md-2 col-sm-2">
+                        <label class="form-control-label" for="field_telephone">Telephone</label>
+                        <input type="text" class="form-control form-control-sm" name="telephone" id="field_telephone"
+                            formControlName="telephone" />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-sm btn-primary">
+                    <fa-icon *ngIf="isLoading" icon="spinner"></fa-icon>
+                    <fa-icon *ngIf="!isLoading" icon="paper-plane"></fa-icon>
+                    &nbsp; <span jhiTranslate="entity.action.filter">Filter</span>
+                </button>
+
+                &nbsp;
+                <button (click)="eraseFilter()" class="btn btn-danger btn-sm">
+                    <fa-icon *ngIf="isLoadingErase" icon="spinner"></fa-icon>
+                    <fa-icon *ngIf="!isLoadingErase" icon="times"></fa-icon>
+                    &nbsp; <span jhiTranslate="entity.action.erase">Effacer</span>
+                </button>
+
+            </div>
+        </form>
+    </fieldset>
     <div class="alert alert-warning" id="no-result" *ngIf="trackerEntityInstances?.length === 0">
         <span>No trackerEntityInstances found</span>
     </div>
@@ -15,23 +98,35 @@
         <table class="table table-bordered table-striped responsive-table" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                    <th scope="col"  ><span>Uid</span> </th>
-                    <th scope="col"  jhiSortBy="localId"><span>Local Id</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  ><span>Nom</span> </th>
-                    <th scope="col"  ><span>Prenom</span> </th>
-                    <th scope="col"  jhiSortBy="sexe"><span>Sexe</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="profession"><span>Profession</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="age"><span>Age</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  ><span>Region</span> </th>
-                    <th scope="col"  ><span>Prefecture</span> </th>
-                    <th scope="col"  ><span>Sous Prefecture</span> </th>
-                    <th scope="col"  ><span>Quartier</span> </th>
-                    <th scope="col"  jhiSortBy="telephone"><span>Telephone</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"><span>Uid</span> </th>
+                    <th scope="col" jhiSortBy="localId"><span>Local Id</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col"><span>Nom</span> </th>
+                    <th scope="col"><span>Prenom</span> </th>
+                    <th scope="col" jhiSortBy="sexe"><span>Sexe</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="profession"><span>Profession</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="age"><span>Age</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col"><span>Region</span> </th>
+                    <th scope="col"><span>Prefecture</span> </th>
+                    <th scope="col"><span>Sous Prefecture</span> </th>
+                    <th scope="col"><span>Quartier</span> </th>
+                    <th scope="col" jhiSortBy="telephone"><span>Telephone</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let trackerEntityInstance of trackerEntityInstances ;trackBy: trackId">
-                    <td data-title="Uid"><a [routerLink]="['/tracker-entity-instance', trackerEntityInstance.id, 'view']">{{ trackerEntityInstance.uid }}</a></td>
+                    <td data-title="Uid"><a
+                            [routerLink]="['/tracker-entity-instance', trackerEntityInstance.id, 'view']">{{ trackerEntityInstance.uid }}</a>
+                    </td>
                     <td data-title="Local Id">{{ trackerEntityInstance.localId }}</td>
                     <td data-title="Nom">{{ trackerEntityInstance.nom }}</td>
                     <td data-title="Prenom">{{ trackerEntityInstance.prenom }}</td>
@@ -43,7 +138,7 @@
                     <td data-title="Sous Prefecture">{{ trackerEntityInstance.sousPrefecture }}</td>
                     <td data-title="Quartier">{{ trackerEntityInstance.quartier }}</td>
                     <td data-title="Telephone">{{ trackerEntityInstance.telephone }}</td>
-                    
+
                 </tr>
             </tbody>
         </table>
@@ -55,7 +150,8 @@
         </div>
 
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage"
+                [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
         </div>
     </div>
 </div>

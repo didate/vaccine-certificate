@@ -32,6 +32,12 @@ import {
   faTrashAlt,
   faAsterisk,
   faTasks,
+  faAngleDoubleLeft,
+  faAngleDoubleRight,
+  faAngleDoubleDown,
+  faAngleDoubleUp,
+  faSpinner,
+  faPaperPlane,
   // jhipster-needle-add-icon-import
   faHome,
 } from '@fortawesome/free-solid-svg-icons';
@@ -70,6 +76,12 @@ export const fontAwesomeIcons = [
   faCalendarAlt,
   faSearch,
   faTrashAlt,
+  faAngleDoubleDown,
+  faAngleDoubleLeft,
+  faAngleDoubleRight,
+  faAngleDoubleUp,
+  faPaperPlane,
+  faSpinner,
   // jhipster-needle-add-icon-import
   faAsterisk,
 ];
