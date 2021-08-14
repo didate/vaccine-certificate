@@ -6,4 +6,6 @@ export interface IPlainte {
   commentaire?: string;
 }
 
-export const defaultValue: Readonly<IPlainte> = {};
+export class Plainte implements IPlainte {
+  constructor(public id?: number, public telephone?: string, public localId?: string, public code?: number, public commentaire?: string) {}
+}

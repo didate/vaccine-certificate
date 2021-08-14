@@ -1,9 +1,7 @@
 package com.ict4h.web.rest;
 
 import com.ict4h.domain.Event;
-import com.ict4h.domain.TrackerEntityInstance;
 import com.ict4h.service.EventService;
-import com.ict4h.service.TrackerEntityInstanceService;
 import com.ict4h.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -11,7 +9,6 @@ import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +38,6 @@ public class EventResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    
     private final EventService eventService;
 
     public EventResource(EventService eventService) {
@@ -114,8 +110,6 @@ public class EventResource {
         Optional<Event> event = eventService.findOne(id);
         return ResponseUtil.wrapOrNotFound(event);
     }
-
-    
 
     /**
      * {@code DELETE  /events/:id} : delete the "id" event.

@@ -4,7 +4,7 @@ import { ITrackerEntityInstance } from 'app/shared/model/tracker-entity-instance
 export interface IEvent {
   id?: number;
   uid?: string;
-  dateVaccination?: string;
+  dateVaccination?: Moment;
   siteVaccination?: string;
   typeVaccin?: string;
   lot?: string;
@@ -12,4 +12,15 @@ export interface IEvent {
   tei?: ITrackerEntityInstance;
 }
 
-export const defaultValue: Readonly<IEvent> = {};
+export class Event implements IEvent {
+  constructor(
+    public id?: number,
+    public uid?: string,
+    public dateVaccination?: Moment,
+    public siteVaccination?: string,
+    public typeVaccin?: string,
+    public lot?: string,
+    public dose?: string,
+    public tei?: ITrackerEntityInstance
+  ) {}
+}

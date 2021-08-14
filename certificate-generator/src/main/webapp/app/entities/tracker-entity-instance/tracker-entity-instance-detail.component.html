@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="trackerEntityInstance">
+            <h2><span>Tracker Entity Instance</span> {{ trackerEntityInstance.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Uid</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.uid }}</span>
+                </dd>
+                <dt><span>Nom</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.nom }}</span>
+                </dd>
+                <dt><span>Prenom</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.prenom }}</span>
+                </dd>
+                <dt><span>Sexe</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.sexe }}</span>
+                </dd>
+                <dt><span>Profession</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.profession }}</span>
+                </dd>
+                <dt><span>Age</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.age }}</span>
+                </dd>
+                <dt><span>Region</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.region }}</span>
+                </dd>
+                <dt><span>Prefecture</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.prefecture }}</span>
+                </dd>
+                <dt><span>Sous Prefecture</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.sousPrefecture }}</span>
+                </dd>
+                <dt><span>Quartier</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.quartier }}</span>
+                </dd>
+                <dt><span>Village</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.village }}</span>
+                </dd>
+                <dt><span>Telephone</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.telephone }}</span>
+                </dd>
+                <dt><span>Local Id</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.localId }}</span>
+                </dd>
+                <dt><span>Code</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.code }}</span>
+                </dd>
+                <dt><span>Certificate</span></dt>
+                <dd>
+                    <span>{{ trackerEntityInstance.certificate }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/tracker-entity-instance', trackerEntityInstance.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

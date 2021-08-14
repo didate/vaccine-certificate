@@ -4,9 +4,7 @@
     {
       "fieldName": "dateGeneration",
       "fieldType": "LocalDate",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [],

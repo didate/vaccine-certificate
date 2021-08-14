@@ -2,7 +2,9 @@ import { Moment } from 'moment';
 
 export interface IGeneration {
   id?: number;
-  dateGeneration?: string;
+  dateGeneration?: Moment;
 }
 
-export const defaultValue: Readonly<IGeneration> = {};
+export class Generation implements IGeneration {
+  constructor(public id?: number, public dateGeneration?: Moment) {}
+}

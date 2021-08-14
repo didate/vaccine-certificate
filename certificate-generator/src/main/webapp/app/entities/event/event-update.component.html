@@ -1,0 +1,116 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-event-heading">Create or edit a Event</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_uid">Uid</label>
+                    <input type="text" class="form-control" name="uid" id="field_uid"
+                           formControlName="uid"/>
+                    <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('uid')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateVaccination">Date Vaccination</label>
+                    <div class="input-group">
+                        <input id="field_dateVaccination" type="text" class="form-control" name="dateVaccination" ngbDatepicker #dateVaccinationDp="ngbDatepicker" formControlName="dateVaccination"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateVaccinationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('dateVaccination')!.invalid && (editForm.get('dateVaccination')!.dirty || editForm.get('dateVaccination')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('dateVaccination')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_siteVaccination">Site Vaccination</label>
+                    <input type="text" class="form-control" name="siteVaccination" id="field_siteVaccination"
+                           formControlName="siteVaccination"/>
+                    <div *ngIf="editForm.get('siteVaccination')!.invalid && (editForm.get('siteVaccination')!.dirty || editForm.get('siteVaccination')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('siteVaccination')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_typeVaccin">Type Vaccin</label>
+                    <input type="text" class="form-control" name="typeVaccin" id="field_typeVaccin"
+                           formControlName="typeVaccin"/>
+                    <div *ngIf="editForm.get('typeVaccin')!.invalid && (editForm.get('typeVaccin')!.dirty || editForm.get('typeVaccin')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('typeVaccin')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_lot">Lot</label>
+                    <input type="text" class="form-control" name="lot" id="field_lot"
+                           formControlName="lot"/>
+                    <div *ngIf="editForm.get('lot')!.invalid && (editForm.get('lot')!.dirty || editForm.get('lot')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('lot')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dose">Dose</label>
+                    <input type="text" class="form-control" name="dose" id="field_dose"
+                           formControlName="dose"/>
+                    <div *ngIf="editForm.get('dose')!.invalid && (editForm.get('dose')!.dirty || editForm.get('dose')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('dose')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tei">Tei</label>
+                    <select class="form-control" id="field_tei" name="tei" formControlName="tei">
+                        <option *ngIf="!editForm.get('tei')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="trackerEntityInstanceOption.id === editForm.get('tei')!.value?.id ? editForm.get('tei')!.value : trackerEntityInstanceOption" *ngFor="let trackerEntityInstanceOption of trackerentityinstances; trackBy: trackById">{{ trackerEntityInstanceOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('tei')!.invalid && (editForm.get('tei')!.dirty || editForm.get('tei')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('tei')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -20,4 +20,24 @@ export interface ITrackerEntityInstance {
   events?: IEvent[];
 }
 
-export const defaultValue: Readonly<ITrackerEntityInstance> = {};
+export class TrackerEntityInstance implements ITrackerEntityInstance {
+  constructor(
+    public id?: number,
+    public uid?: string,
+    public nom?: string,
+    public prenom?: string,
+    public sexe?: string,
+    public profession?: string,
+    public age?: number,
+    public region?: string,
+    public prefecture?: string,
+    public sousPrefecture?: string,
+    public quartier?: string,
+    public village?: string,
+    public telephone?: string,
+    public localId?: string,
+    public code?: number,
+    public certificate?: string,
+    public events?: IEvent[]
+  ) {}
+}

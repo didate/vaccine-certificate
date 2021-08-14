@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-signature-heading">Create or edit a Signature</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_authorite">Authorite</label>
+                    <input type="text" class="form-control" name="authorite" id="field_authorite"
+                           formControlName="authorite"/>
+                    <div *ngIf="editForm.get('authorite')!.invalid && (editForm.get('authorite')!.dirty || editForm.get('authorite')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('authorite')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_signature">Signature</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('signatureContentType')!.value + ';base64,' + editForm.get('signature')!.value" style="max-height: 100px;" *ngIf="editForm.get('signature')!.value" alt="signature image"/>
+                        <div *ngIf="editForm.get('signature')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('signatureContentType')!.value }}, {{ byteSize(editForm.get('signature')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('signature', 'signatureContentType', 'file_signature')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_signature" (change)="setFileData($event, 'signature', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="signature" id="field_signature"
+                           formControlName="signature"/>
+                    <input type="hidden" class="form-control" name="signatureContentType" id="field_signatureContentType"
+                           formControlName="signatureContentType" />
+                    <div *ngIf="editForm.get('signature')!.invalid && (editForm.get('signature')!.dirty || editForm.get('signature')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('signature')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

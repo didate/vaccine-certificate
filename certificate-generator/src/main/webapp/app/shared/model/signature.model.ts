@@ -5,4 +5,6 @@ export interface ISignature {
   signature?: any;
 }
 
-export const defaultValue: Readonly<ISignature> = {};
+export class Signature implements ISignature {
+  constructor(public id?: number, public authorite?: string, public signatureContentType?: string, public signature?: any) {}
+}

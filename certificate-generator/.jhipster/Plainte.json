@@ -16,9 +16,7 @@
     {
       "fieldName": "commentaire",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [],

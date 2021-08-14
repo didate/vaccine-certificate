@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="event">
+            <h2><span>Event</span> {{ event.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Uid</span></dt>
+                <dd>
+                    <span>{{ event.uid }}</span>
+                </dd>
+                <dt><span>Date Vaccination</span></dt>
+                <dd>
+                    <span>{{ event.dateVaccination }}</span>
+                </dd>
+                <dt><span>Site Vaccination</span></dt>
+                <dd>
+                    <span>{{ event.siteVaccination }}</span>
+                </dd>
+                <dt><span>Type Vaccin</span></dt>
+                <dd>
+                    <span>{{ event.typeVaccin }}</span>
+                </dd>
+                <dt><span>Lot</span></dt>
+                <dd>
+                    <span>{{ event.lot }}</span>
+                </dd>
+                <dt><span>Dose</span></dt>
+                <dd>
+                    <span>{{ event.dose }}</span>
+                </dd>
+                <dt><span>Tei</span></dt>
+                <dd>
+                    <div *ngIf="event.tei">
+                        <a [routerLink]="['/tracker-entity-instance', event.tei?.id, 'view']">{{ event.tei?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/event', event.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
