@@ -26,27 +26,23 @@
                     <th scope="col"  ><span>Prefecture</span> </th>
                     <th scope="col"  ><span>Sous Prefecture</span> </th>
                     <th scope="col"  ><span>Quartier</span> </th>
-                    <th scope="col"  ><span>Village</span> </th>
                     <th scope="col"  jhiSortBy="telephone"><span>Telephone</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  ><span>Code</span> </th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let trackerEntityInstance of trackerEntityInstances ;trackBy: trackId">
-                    <td><a [routerLink]="['/tracker-entity-instance', trackerEntityInstance.id, 'view']">{{ trackerEntityInstance.uid }}</a></td>
-                    <td>{{ trackerEntityInstance.localId }}</td>
-                    <td>{{ trackerEntityInstance.nom }}</td>
-                    <td>{{ trackerEntityInstance.prenom }}</td>
-                    <td>{{ trackerEntityInstance.sexe }}</td>
-                    <td>{{ trackerEntityInstance.profession }}</td>
-                    <td>{{ trackerEntityInstance.age }} ans</td>
-                    <td>{{ trackerEntityInstance.region }}</td>
-                    <td>{{ trackerEntityInstance.prefecture }}</td>
-                    <td>{{ trackerEntityInstance.sousPrefecture }}</td>
-                    <td>{{ trackerEntityInstance.quartier }}</td>
-                    <td>{{ trackerEntityInstance.village }}</td>
-                    <td>{{ trackerEntityInstance.telephone }}</td>
-                    <td>{{ trackerEntityInstance.code }}</td>
+                    <td data-title="Uid"><a [routerLink]="['/tracker-entity-instance', trackerEntityInstance.id, 'view']">{{ trackerEntityInstance.uid }}</a></td>
+                    <td data-title="Local Id">{{ trackerEntityInstance.localId }}</td>
+                    <td data-title="Nom">{{ trackerEntityInstance.nom }}</td>
+                    <td data-title="Prenom">{{ trackerEntityInstance.prenom }}</td>
+                    <td data-title="Sexe">{{ trackerEntityInstance.sexe }}</td>
+                    <td data-title="Profession">{{ trackerEntityInstance.profession }}</td>
+                    <td data-title="Age">{{ trackerEntityInstance.age }} ans</td>
+                    <td data-title="Region">{{ trackerEntityInstance.region }}</td>
+                    <td data-title="Prefecture">{{ trackerEntityInstance.prefecture }}</td>
+                    <td data-title="Sous Prefecture">{{ trackerEntityInstance.sousPrefecture }}</td>
+                    <td data-title="Quartier">{{ trackerEntityInstance.quartier }}</td>
+                    <td data-title="Telephone">{{ trackerEntityInstance.telephone }}</td>
                     
                 </tr>
             </tbody>

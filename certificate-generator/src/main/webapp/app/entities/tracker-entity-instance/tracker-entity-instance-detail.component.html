@@ -1,101 +1,131 @@
 <div class="row justify-content-center">
     <div class="col-12">
         <div *ngIf="trackerEntityInstance">
-           
             <jhi-alert-error></jhi-alert-error>
+            <div class="row">
+                <div class="col-sm-4">
+                    <table class="table table-bordered">
+                        <tbody>
 
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <th class="th-title">UID</th>
-                        <td>{{ trackerEntityInstance.uid }}</td>
+                            <tr>
+                                <th class="th-title">UID</th>
+                                <td>{{ trackerEntityInstance.uid }}</td>
+                            </tr>
 
-                        <th class="th-title">SEXE</th>
-                        <td>{{ trackerEntityInstance.sexe }}</td>
+                            <tr>
+                                <th class="th-title">LOCAL ID</th>
+                                <td>{{ trackerEntityInstance.localId }}</td>
+                            </tr>
 
-                        <th class="th-title">REGION</th>
-                        <td>{{ trackerEntityInstance.region }}</td>
-                    </tr>
+                            <tr>
+                                <th class="th-title">CODE</th>
+                                <td>{{ trackerEntityInstance.code }} </td>
+                            </tr>
 
-                    <tr>
-                        <th class="th-title">LOCAL ID</th>
-                        <td>{{ trackerEntityInstance.localId }}</td>
+                            <tr>
+                                <th class="th-title">NOM</th>
+                                <td>{{ trackerEntityInstance.prenom }} {{ trackerEntityInstance.nom }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-4">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th class="th-title">SEXE</th>
+                                <td>{{ trackerEntityInstance.sexe }}</td>
+                            </tr>
 
-                        <th class="th-title">AGE</th>
-                        <td>{{ trackerEntityInstance.age }} ans</td>
-                        
-                        <th class="th-title">PREFECTURE</th>
-                        <td>{{ trackerEntityInstance.prefecture }}</td>
-                        
-                    </tr>
-
-                    <tr>
-
-                        <th class="th-title">CODE</th>
-                        <td>{{ trackerEntityInstance.code }} </td>
-
-                        <th class="th-title">PROFESSION</th>
-                        <td>{{ trackerEntityInstance.profession }}</td>
-
-                        <th class="th-title">SOUS PREFECTURE</th>
-                        <td>{{ trackerEntityInstance.sousPrefecture }}</td>
-                        
-                    </tr>
-
-                    <tr>
-                        <th class="th-title">NOM</th>
-                        <td>{{ trackerEntityInstance.prenom }} {{ trackerEntityInstance.nom }}</td>
+                            <tr>
+                                <th class="th-title">AGE</th>
+                                <td>{{ trackerEntityInstance.age }} ans</td>
+                            </tr>
+                            <tr>
+                                <th class="th-title">PROFESSION</th>
+                                <td>{{ trackerEntityInstance.profession }}</td>
+                            </tr>
+                            <tr>
+                                <th class="th-title">TELEPHONE</th>
+                                <td>{{ trackerEntityInstance.telephone }}</td>
+                            </tr>
 
 
-                        <th class="th-title">TELEPHONE</th>
-                        <td>{{ trackerEntityInstance.telephone }}</td>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-4">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th class="th-title">REGION</th>
+                                <td>{{ trackerEntityInstance.region }}</td>
+                            </tr>
+                            <tr>
+                                <th class="th-title">PREFECTURE</th>
+                                <td>{{ trackerEntityInstance.prefecture }}</td>
+                            </tr>
+                            <tr>
+                                <th class="th-title">SOUS PREFECTURE</th>
+                                <td>{{ trackerEntityInstance.sousPrefecture }}</td>
+                            </tr>
+                            <tr>
+                                <th class="th-title">QUARTIER</th>
+                                <td>{{ trackerEntityInstance.quartier }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-                        <th class="th-title">QUARTIER</th>
-                        <td>{{ trackerEntityInstance.quartier }}</td>
+            <h2 id="page-heading">
+                <span>Events</span>
+            </h2>
+            <div class="table-responsive" id="events" *ngIf="events && events.length > 0">
 
-                    </tr>
-                </tbody>
-            </table>
-            
-    <div class="table-responsive" id="events" *ngIf="events && events.length > 0">
+                <table class="table table-striped responsive-table" aria-describedby="page-heading">
+                    <thead>
+                        <tr>
+                            <th scope="col"><span>Uid</span>
+                                <fa-icon icon="sort"></fa-icon>
+                            </th>
+                            <th scope="col"><span>Dose</span>
+                                <fa-icon icon="sort"></fa-icon>
+                            </th>
+                            <th scope="col"><span>Date Vaccination</span>
+                                <fa-icon icon="sort"></fa-icon>
+                            </th>
+                            <th scope="col"><span>Site Vaccination</span>
+                                <fa-icon icon="sort"></fa-icon>
+                            </th>
+                            <th scope="col"><span>Type Vaccin</span>
+                                <fa-icon icon="sort"></fa-icon>
+                            </th>
+                            <th scope="col"><span>Lot</span>
+                                <fa-icon icon="sort"></fa-icon>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let event of events ;trackBy: trackId">
+                            <td data-title="Uid">{{ event.uid }}</td>
+                            <td data-title="Dose">{{ event.dose }}</td>
+                            <td data-title="Date Vaccination">{{ event.dateVaccination | date:'mediumDate' }}</td>
+                            <td data-title="Site Vaccination">{{ event.siteVaccination }}</td>
+                            <td data-title="Type Vaccin">{{ event.typeVaccin }}</td>
+                            <td data-title="Lot">{{ event.lot }}</td>
 
-        <table class="table table-striped responsive-table" aria-describedby="page-heading">
-            <thead>
-                <tr>
-                    <th scope="col"  ><span>Uid</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  ><span>Dose</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  ><span>Date Vaccination</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  ><span>Site Vaccination</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  ><span>Type Vaccin</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  ><span>Lot</span> <fa-icon icon="sort"></fa-icon></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let event of events ;trackBy: trackId">
-                    <td>{{ event.uid }}</td>
-                    <td>{{ event.dose }}</td>
-                    <td>{{ event.dateVaccination | date:'mediumDate' }}</td>
-                    <td>{{ event.siteVaccination }}</td>
-                    <td>{{ event.typeVaccin }}</td>
-                    <td>{{ event.lot }}</td>
-                    
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            
-            
-           
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/tracker-entity-instance', trackerEntityInstance.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/tracker-entity-instance', trackerEntityInstance.id, 'edit']"
+                class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>

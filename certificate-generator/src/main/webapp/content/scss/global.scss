@@ -297,10 +297,11 @@ ui bootstrap tweaks
     bottom: 0px;
     width: 130px;
     color: white;
-    background-color: #1d96b2;
+    background-color: $primary;
     display: flex;
     align-items: center;
     font-weight: bold;
+    text-transform: uppercase;
   }
   .responsive-table tr {
     margin-bottom: 1rem;
