@@ -1,43 +1,78 @@
-<div class="row">
-    <div class="col-md-3">
-        <span class="hipster img-fluid rounded"></span>
-    </div>
+<div class="home d-flex justify-content-center align-items-center">
 
-    <div class="col-md-9">
-        <h1 class="display-4">Welcome, Java Hipster!</h1>
 
-        <p class="lead">This is your homepage</p>
 
-        <div [ngSwitch]="isAuthenticated()">
-            <div class="alert alert-success" *ngSwitchCase="true">
-                <span id="home-logged-message" *ngIf="account">You are logged in as user "{{ account.login }}".</span>
-            </div>
+    <div class="">
+       
 
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>If you want to </span>
-                <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
-            </div>
+        <form name="editForm" role="form" (ngSubmit)="search()" novalidate [formGroup]="editForm">
 
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>You don't have an account yet?</span>&nbsp;
-                <a class="alert-link" routerLink="account/register">Register a new account</a>
-            </div>
+           <!--  <div class="form-row">
+                <div class="form-group col-md-2 col-sm-2">
+
+                    <label class="form-control-label" for="field_uid">Uid</label>
+                    <input type="text" class="form-control form-control-sm" name="criteria" id="field_criteria"
+                        formControlName="criteria" />
+                </div>
+                
+            </div> -->
+           
+            <div class="input-group">
+                <input type="search" class="form-control rounded" placeholder="Numéro téléphone ou Code" aria-label="Search"
+                  aria-describedby="search-addon" name="criteria" id="field_criteria"
+                  formControlName="criteria" />
+                <button type="submit" class="btn btn-outline-primary">Rechercher</button>
+              </div>
+
+            <!--    <button type="submit" class="btn btn-sm btn-primary">
+                    <fa-icon *ngIf="isLoading" icon="spinner"></fa-icon>
+                    <fa-icon *ngIf="!isLoading" icon="paper-plane"></fa-icon>           
+                    &nbsp; <span jhiTranslate="entity.action.filter">Filter</span>
+                </button>
+ -->
+            
+        </form>
+
+
+        <br>
+
+        <div class="table-responsive" id="entities" *ngIf="trackerEntityInstances && trackerEntityInstances.length > 0">
+            <table class="table table-bordered table-striped responsive-table" aria-describedby="page-heading">
+                <thead>
+                    <tr>
+                        
+                        <th scope="col"><span>Nom</span> </th>
+                        <th scope="col"><span>Prenom</span> </th>
+                        <th scope="col"><span>Sexe</span>
+                            <fa-icon icon="sort"></fa-icon>
+                        </th>
+                        <th scope="col" ><span>Profession</span>
+                            <fa-icon icon="sort"></fa-icon>
+                        </th>
+                        <th scope="col"><span>Telephone</span>
+                            <fa-icon icon="sort"></fa-icon>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let trackerEntityInstance of trackerEntityInstances ;trackBy: trackId">
+                        
+                        <td data-title="Nom">{{ trackerEntityInstance.nom }}</td>
+                        <td data-title="Prenom">{{ trackerEntityInstance.prenom }}</td>
+                        <td data-title="Sexe">{{ trackerEntityInstance.sexe }}</td>
+                        <td data-title="Profession">{{ trackerEntityInstance.profession }}</td>
+                       
+                        <td data-title="Telephone">{{ trackerEntityInstance.telephone }}</td>
+    
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <p>
-            If you have any question on JHipster:
-        </p>
+        <div [ngSwitch]="isAuthenticated()">
+            
+        </div>
 
-        <ul>
-            <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">JHipster homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">follow @jhipster on Twitter</a></li>
-        </ul>
-
-        <p>
-            <span>If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">GitHub</a>!
-        </p>
     </div>
+
 </div>

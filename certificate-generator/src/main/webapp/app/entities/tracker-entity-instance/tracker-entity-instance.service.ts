@@ -31,6 +31,13 @@ export class TrackerEntityInstanceService {
   findEvent(id?: number): Observable<HttpResponse<IEvent[]>> {
     return this.http.get<IEvent[]>(`${this.resourceUrl}/${id}/events`, { observe: 'response' });
   }
+  frontSearch(criteria?: string, req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<ITrackerEntityInstance[]>(`${this.resourceUrl}/front-search/${criteria}`, {
+      params: options,
+      observe: 'response',
+    });
+  }
 
   query(search?: string, req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);

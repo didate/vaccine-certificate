@@ -140,9 +140,24 @@ public class TrackerEntityInstanceResource {
 
     @GetMapping("/tracker-entity-instances/{id}/events")
     public ResponseEntity<List<Event>> getEvents(@PathVariable Long id) {
-        log.debug("REST request to get TrackerEntityInstance : {}", id);
+        log.debug("REST request to get Event of TrackerEntityInstance : {}", id);
         List<Event> events = eventService.findByTei(getTrackerEntityInstance(id).getBody());
         return ResponseEntity.ok(events);
+    }
+
+    @GetMapping("/tracker-entity-instances/front-search/{criteria}")
+    public ResponseEntity<List<TrackerEntityInstance>> frontSearch(@PathVariable String criteria, Pageable pageable) {
+        log.debug("REST request to get TrackerEntityInstance : {}", criteria);
+        Specification<TrackerEntityInstance> specification = resolveSpecification("telephone:"+criteria);
+        Page<TrackerEntityInstance> page = trackerEntityInstanceService.findAll(specification, pageable);
+
+        if(page.getContent() != null && page.getContent().size() == 0){
+            specification = resolveSpecification("code:"+criteria);
+            page = trackerEntityInstanceService.findAll(specification, pageable);
+        }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+
     }
 
     /**

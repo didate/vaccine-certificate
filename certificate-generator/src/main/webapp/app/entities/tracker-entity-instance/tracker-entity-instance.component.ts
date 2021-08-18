@@ -11,6 +11,7 @@ import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { TrackerEntityInstanceService } from './tracker-entity-instance.service';
 import { TrackerEntityInstanceDeleteDialogComponent } from './tracker-entity-instance-delete-dialog.component';
 import { FormBuilder } from '@angular/forms';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'jhi-tracker-entity-instance',
@@ -32,7 +33,7 @@ export class TrackerEntityInstanceComponent implements OnInit, OnDestroy {
   isLoading = true;
   isLoadingErase = false;
   isFilterShow = false;
-  filterIcon = 'angle-double-down';
+  filterIcon: IconProp = 'angle-double-down';
 
   editForm = this.fb.group({
     id: [],
